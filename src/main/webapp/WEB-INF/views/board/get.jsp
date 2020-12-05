@@ -36,7 +36,7 @@
 					
 					<div class="form-group">
 						<label>Text area</label>
-						<textarea class="form-control" rows="3" name="content"  readonly="readonly">
+						<textarea class="form-control" cols="20" rows="3" name="content"  readonly="readonly">
 							<c:out value="${board.content}"/>
 						</textarea>
 					</div>

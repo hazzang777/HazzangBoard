@@ -208,7 +208,12 @@
 			<artifactId>jackson-dataformat-xml</artifactId>
 			<version>2.9.5</version>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.2</version>
+		</dependency>
 
 	<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
 	<dependency>
@@ -225,9 +230,15 @@
 		<version>2.3.0</version>
 	</dependency>
 
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-websocket</artifactId>
+	    <version>${org.springframework-version}</version>
+	</dependency>
+	
 
-
-
+	
 <dependency>
     <groupId>org.springframework.security</groupId>
     <artifactId>spring-security-web</artifactId>

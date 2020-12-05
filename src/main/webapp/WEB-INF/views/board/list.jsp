@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
-    
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>     
 <%@include file="../includes/header.jsp" %>
             <div class="row">
                 <div class="col-lg-12">
@@ -35,7 +35,7 @@
                                 	<td><c:out value="${board.bno}" /></td>
                                 	<td><a class="move" href='<c:out value="${board.bno}"/>'><c:out value="${board.title}" />
                                 	<b>[<c:out value="${board.replyCnt}" />]</b></a></td>
-                                	<td><c:out value="${board.writer}" /></td>
+                                	<td class="target"><c:out value="${board.writer}" /></td>
                                 	<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}" /></td>
                                 	<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updatedate}" /></td>
                                 </tr>
@@ -123,6 +123,47 @@
                </div>
                <!-- /.row -->
                
+       <sec:authentication property="principal" var="pinfo" /> 
+       
+      <sec:authorize access="isAuthenticated()">        
+               <!-- Modal -->
+      <div class="modal fade" id="MsgModal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"
+                aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="msgModalLabel">Message MODAL</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label>Sender</label> 
+                <input class="form-control" name='sender' value='${pinfo.username}' readonly="readonly">
+              </div>      
+              <div class="form-group">
+                <label>Targetid</label> 
+                <input class="form-control receiver" name='targetid' readonly="readonly">
+              </div>
+              <div class="form-group">
+                <label>Message</label> 
+                <textarea class="form-control" rows="3" name='message' ></textarea>
+              </div>
+      
+            </div>
+		<div class="modal-footer">
+		
+	        <button id='msgSendBtn' type="button" class="btn btn-primary">Send</button>
+	      
+	        <button id='msgCloseBtn' type="button" class="btn btn-default">Close</button>
+	     </div>          
+	     </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+        </sec:authorize>              
      <script type="text/javascript">
      	$(document).ready(function(){
      		
@@ -187,6 +228,59 @@
      		});
      			
      			
+     		
+     	});
+     </script>
+     <script>
+     	$(document).ready(function(){
+     		
+     		
+     		$(".target").on("click",function(){
+     			console.log(this.innerText);
+     			$(".receiver").val(this.innerText);
+     			$("#MsgModal").modal("show");
+     			
+     		});
+     		
+     		$("#msgCloseBtn").on("click",function(){
+     			
+     			$("#MsgModal").modal("hide");
+     		});
+     		
+     		var modal = $("#MsgModal");
+     		var modalMsgSender = modal.find("input[name='sender']");
+     		var modalMsgTarget = modal.find("input[name='targetid']");
+     		var modalMsgMsg = modal.find("textarea[name='message']");
+     		
+     		var csrfHeaderName = "${_csrf.headerName}";
+    	    var csrfTokenValue = "${_csrf.token}";
+     		
+     		$("#msgSendBtn").on("click",function(){
+     			
+     			var msg = {
+     					targetid:modalMsgTarget.val(),
+     					sender:modalMsgSender.val(),
+     					message:modalMsgMsg.val()
+     			};
+     			console.log(msg);
+     			$.ajax({
+     				url:"/messages/",
+     				type:'POST',
+     				beforeSend: function(xhr){
+     	    			xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+     	    		},
+     				dataType:'text',
+     				contentType:'application/json; charset=utf-8',
+     				data:JSON.stringify(msg),
+     				success:function(result){
+     					alert("메시지를 보냈습니다.");
+     					modal.modal("hide");
+     					
+     				}
+     			});
+     		
+     			
+     		});
      		
      	});
      </script>          

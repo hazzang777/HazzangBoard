@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.MessageMapper">
+	<insert id="create">
+		insert into tbl_message(mid, targetid, sender, message)
+		values (message_seq.NEXTVAL,#{targetid},#{sender},#{message})
+	</insert>
+	
+	<select id="getMsgCount" resultType="int">
+		select count(*) from tbl_message where targetid = #{targetid} and reads = 'n'
+	</select>
+	
+	<select id="myReceiveMsg" resultType="org.zerock.domain.MessageVO">
+		select * from tbl_message where targetid = #{targetid}
+	</select>
+	
+	<select id="mySendMsg" resultType="org.zerock.domain.MessageVO">
+		select * from tbl_message where sender = #{sender}
+	</select>
+	
+	<select id="get" resultType="org.zerock.domain.MessageVO">
+		select * from tbl_message where mid = #{mid} and sender = #{id}
+	</select>
+	
+	<update id="updateReads">
+		update tbl_message set reads = 'y' where mid = #{mid} and targetid = #{id}
+	</update>
+	
+</mapper>
