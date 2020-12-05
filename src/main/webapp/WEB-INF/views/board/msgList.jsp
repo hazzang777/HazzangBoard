@@ -67,8 +67,8 @@
                                 <c:forEach items="${slist}" var="sboard">
                                 <tr>
                                 	<td><c:out value="${sboard.mid}" /></td>
-                                	<td><a class="move" href='<c:out value="${sboard.mid}"/>'><c:out value="${sboard.mid}" />
-                                	<b>[<c:out value="${sboard.sender}" />]</b></a></td>
+                                	<td><a class="move" href='<c:out value="${sboard.mid}"/>'>
+                                	<b>[<c:out value="${sboard.targetid}" />]</b></a></td>
                                 	<td><fmt:formatDate pattern="yyyy-MM-dd" value="${sboard.senddate}" /></td>
                                 	<td><c:out value="${sboard.reads}" /></td>
                                 </tr>

@@ -63,8 +63,24 @@ public class MessageController {
 		log.info("넘어노는 아이디" + id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/board/msgGet");
+		service.updateR(mid, id);
 		mav.addObject("get", service.get(mid, id));
 		
 		return mav;
 	}
+	
+	@GetMapping("/remove")
+	public  ModelAndView remove(int mid, String id) {
+		log.info("삭제하는 글번호 : " + mid);
+		service.remove(mid);
+		log.info("타겟아이디: " + id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/board/msgList");
+		mav.addObject("rlist", service.getReceiveMsg(id));
+		mav.addObject("slist", service.getSendMsg(id));
+		return mav;
+	}
+	
+	
 }

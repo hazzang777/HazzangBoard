@@ -64,7 +64,8 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                       <span id="count" class="badge bg-theme"></span>
+                       <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                     	<sec:authorize access="isAuthenticated()">
@@ -122,6 +123,72 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-        <div id="page-wrapper">
+       <div id="page-wrapper">
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      
+      <sec:authorize access="isAuthenticated()">
+        <script>
+        <script type="text/javascript">
+
+        var wsUri = "ws://localhost:8090/cnt";
+		var targetid = "${pinfo.username}"
+        function send_message() {
+
+            websocket = new WebSocket(wsUri);
+
+            websocket.onopen = function(evt) {
+
+                onOpen(evt);
+
+            };
+
+            websocket.onmessage = function(evt) {
+
+                onMessage(evt);
+
+            };
+
+            websocket.onerror = function(evt) {
+
+                onError(evt);
+
+            };
+
+        }
+
+       
+
+        function onOpen(evt) 
+
+        {
+
+           websocket.send("targetid");
+
+        }
+
+        function onMessage(evt) {
+
+        		$('#count').append(evt.data);
+
+        }
+
+        function onError(evt) {
+
+        }
+
+        $(document).ready(function(){
+
+        		send_message();
+
+        });
+
+        		
+
+        
+
+            </script>
+
+</sec:authorize>
+
+  

@@ -20,4 +20,10 @@ public interface MessageService {
 	
 	// 상세내용
 	public MessageVO get(int mid, String id);
+	
+	// 상태바꾸기
+	public int updateR(int mid, String id);
+	
+	// 메시지 삭제
+	public int remove(int mid);
 }

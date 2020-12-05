@@ -44,10 +44,19 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public MessageVO get(int mid, String id) {
-		
-		messageMapper.updateReads(mid, id);
-		
 		return messageMapper.get(mid, id);
+	}
+
+	@Override
+	public int updateR(int mid, String id) {
+		
+		return messageMapper.updateReads(mid, id);
+	}
+
+	@Override
+	public int remove(int mid) {
+		
+		return messageMapper.delete(mid);
 	}
 	
 	

@@ -25,7 +25,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="updateReads">
-		update tbl_message set reads = 'y' where mid = #{mid} and targetid = #{id}
+		update tbl_message set reads = 'y' where mid = #{mid} and sender = #{id}
 	</update>
+	
+	<delete id="delete">
+		delete from tbl_message where mid = #{mid}
+	</delete>
 	
 </mapper>

@@ -7,7 +7,10 @@
 
 	<websocket:handlers>
 		<websocket:mapping handler="chatHandler" path="/chat-ws"/>
+		<websocket:mapping handler="myHandler" path="/cnt"/>
 	</websocket:handlers>
 	
 	<bean id="chatHandler" class="org.zerock.handler.ChatHandler"></bean>
+	<bean id="myHandler" class="org.zerock.handler.MyHandler"></bean>
+	
 </beans>

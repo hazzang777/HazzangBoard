@@ -11,7 +11,7 @@ public interface MessageMapper {
 	public void create(MessageVO vo);
 	
 	// 안읽은 메시지
-	public int getMsgCnt(String targetid);
+	public int getMsgCnt(@Param("targetid") String targetid);
 	
 	// 받은 메시지
 	public List<MessageVO> myReceiveMsg(String targetid);
@@ -24,4 +24,7 @@ public interface MessageMapper {
 	
 	// 상세내용 누를 때 읽은 상태로 바꾸기
 	public int updateReads(@Param("mid") int mid,@Param("id") String id);
+	
+	// 메시지 삭제 기능
+	public int delete(int mid);
 }
