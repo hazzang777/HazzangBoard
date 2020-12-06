@@ -14,6 +14,10 @@
     <meta name="author" content="">
 
     <title>HAZZANG</title>
+    
+    <!-- chart.js -->
+     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -103,14 +107,12 @@
                         <sec:authorize access="isAuthenticated()">
                         <c:if test="${pinfo.username eq 'admin90'}">
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 통계<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Flot Charts</a>
+                                    <a href="/admin/pages">월별 게시글 수</a>
                                 </li>
-                                <li>
-                                    <a href="morris.html">Morris.js Charts</a>
-                                </li>
+                               
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

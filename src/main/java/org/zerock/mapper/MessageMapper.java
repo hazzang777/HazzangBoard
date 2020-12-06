@@ -3,6 +3,7 @@ package org.zerock.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.zerock.domain.Criteria;
 import org.zerock.domain.MessageVO;
 
 public interface MessageMapper {
@@ -27,4 +28,10 @@ public interface MessageMapper {
 	
 	// 메시지 삭제 기능
 	public int delete(int mid);
+	
+	// 받은 메시지 페이징 처리
+	public List<MessageVO> myReceiveMsgPaging(Criteria cri, String targetid);
+	
+	// 받은 메시지 페이징 처리
+	public List<MessageVO> mySendMsgPaging(Criteria cri, String sender);
 }

@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -132,6 +133,8 @@ public class BoardController {
 	public void register() {
 		
 	}
+	
+	
 	
 	private void deleteFiles(List<BoardAttachVO> attachList) {
 		

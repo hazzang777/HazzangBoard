@@ -7,4 +7,8 @@ public interface MemberService {
 	public void insert(MemberVO vo);
 	
 	public int idCheck(String id);
+	
+	public int delete(String id);
+	
+	
 }

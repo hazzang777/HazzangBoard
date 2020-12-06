@@ -54,6 +54,8 @@
 						</sec:authorize>
 					<button data-oper='list' class="btn btn-info">List</button>
 					
+					
+					
 					<form method="get" action="/board/bodify" id="operForm">
 						<input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}" />'>
 						<input type='hidden'  name='pageNum' value='<c:out value="${cri.pageNum}" />'>
@@ -184,7 +186,7 @@
 	<!-- ./ end row -->
 </div>
 
-<!-- Modal -->
+<!-- 댓글 Modal -->
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
         aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -214,6 +216,36 @@
 	        <button id='modalRemoveBtn' type="button" class="btn btn-danger">Remove</button>
 	        <button id='modalRegisterBtn' type="button" class="btn btn-primary">Register</button>
 	        <button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
+	     </div>          
+	     </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+      
+      <!-- 신고 Modal -->
+      <div class="modal fade" id="reModal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"
+                aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">신고하기</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label>신고</label> 
+               	<select name="reportOpt">
+               		<option value="부적절한 용어">부적절한 용어</option>
+               		<option value="부적절한 이미지">부적절한 이미지</option>
+               	</select>
+              </div>      
+      
+            </div>
+		<div class="modal-footer">
+	        <button id='reportRegisterBtn' type="button" class="btn btn-primary">신고</button>
 	     </div>          
 	     </div>
           <!-- /.modal-content -->
@@ -326,7 +358,7 @@ $(document).ready(function(){
 		   showList(pageNum);
 	   })
 	   
-	 	var modal = $(".modal");
+	 	var modal = $("#myModal");
 	    var modalInputReply = modal.find("input[name='reply']");
 	    var modalInputReplyer = modal.find("input[name='replyer']");
 	    var modalInputReplyDate = modal.find("input[name='replyDate']");
@@ -360,7 +392,7 @@ $(document).ready(function(){
 	      
 	      modalRegisterBtn.show();
 	      
-	      $(".modal").modal("show");
+	      $("#myModal").modal("show");
 	      
 	    });
 	    
@@ -405,7 +437,7 @@ $(document).ready(function(){
 	    		modalModBtn.show();
 	    		modalRemoveBtn.show();
 	    		
-	    		$(".modal").modal("show");
+	    		$("#myModal").modal("show");
 	    	});
 	    });
 	    
@@ -617,5 +649,7 @@ $(document).ready(function(){
 		  });
 	});
 </script>
+
+
 
  <%@include file="../includes/footer.jsp" %>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.zerock.domain.BoardAttachVO;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
@@ -110,6 +111,14 @@ public class BoardServiceImpl implements BoardService {
 		log.info("get Attach list by bno" + bno);
 		
 		return attachMapper.findByBno(bno);
+	}
+
+	@Override
+	public int decCount() {
+		
+		
+		
+		return mapper.decCnt();
 	}
 	
 	
